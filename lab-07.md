@@ -11,12 +11,13 @@ library(tidyverse)
 
 ### Exercise 1
 
+This plot oversimplified the concept of wear mask, and other situations,
+like quarantine policy, health baseline. The original visualization
+somehow have dual Y-Axis Scaling, making direct comparisons difficult.
+Based on this plot, it seems like mask mandates lead to higher cases
+initially.
+
 ``` r
-# This plot oversimplified the concept of wear mask, and other situations, like quarantine policy, health baseline. 
-# The original visualization somehow have dual Y-Axis Scaling, making direct comparisons difficult.
-# Based on this plot, it seems like mask mandates lead to higher cases initially.
-
-
 covid_data <- tribble(
   ~date, ~covid_cases, ~counties,
   "03/1/2020",  23, "Mask",
@@ -78,9 +79,8 @@ covid_data
     ## 10 03/5/2020        10.2 No Mask 
     ## # ℹ 30 more rows
 
-``` r
-# 3 columns, and 31 rows; this dataset shows an increase in mask-wearing and a decrease in COVID-19 cases-in general- over time.
-```
+3 columns, and 31 rows; this dataset shows an increase in mask-wearing
+and a decrease in COVID-19 cases-in general- over time.
 
 ### Exercise 2
 
@@ -106,23 +106,35 @@ ggplot(covid_data, aes(x = date, y = covid_cases, color = counties, group = coun
 
 ![](lab-07_files/figure-gfm/accurately%20visualization-1.png)<!-- -->
 
-``` r
-# my plot show a clear decrease trend for mask wearing; and a increase trend for no mask counties. and we can clearly see how wearing mask vs. not wearing mask affect covid cases. 
-# and my plot labeled mask vs no mask with different color, it's more clear than the original plot. 
-```
+<!-- {r more clear visz} -->
+
+my plot show a clear decrease trend for mask wearing; and a increase
+trend for no mask counties. and we can clearly see how wearing mask
+vs. not wearing mask affect covid cases. and my plot labeled mask vs no
+mask with different color, it’s more clear than the original plot.
+
+<!-- {r useful information} -->
+
+What, if any, useful information do these data and your visualization
+tell us about mask wearing and COVID? It’ll be difficult to set aside
+what you already know about mask wearing, but you should try to focus
+only on what this visualization tells. Feel free to also comment on
+whether that lines up with what you know about mask wearing.
+
+so only based on my visualization, it seems like wearing mask reduces
+the rate of covid, but it takes time to see this effect; whereas without
+a mask, the effect is less pronounced initially, but as time goes on,
+the rate of covid increases. And while wearing a mask will slow down the
+chances of getting the covid, it’s not a complete elimination. There are
+still cases of covid in both masked and non-masked areas.
+
+<!-- {r misleading visz} -->
+
+the easier way would be change the Y-axis to make it seems like the
+cases increased in mask-wearing counties. and change the color, to
+attract the attention.
 
 ``` r
-# What, if any, useful information do these data and your visualization tell us about mask wearing and COVID? It’ll be difficult to set aside what you already know about mask wearing, but you should try to focus only on what this visualization tells. Feel free to also comment on whether that lines up with what you know about mask wearing.
-
-# so only based on my visualization, it seems like wearing mask reduces the rate of covid, but it takes time to see this effect; whereas without a mask, the effect is less pronounced initially, but as time goes on, the rate of covid increases. 
-# And while wearing a mask will slow down the chances of getting the covid, it's not a complete elimination. There are still cases of covid in both masked and non-masked areas.
-```
-
-``` r
-# the easier way would be change the Y-axis to make it seems like the cases increased in mask-wearing counties.
-# and change the color, to attract the attention. 
-
-
 ggplot(covid_data, aes(x = date, y = covid_cases, color = counties, group = counties)) +
   geom_line(size = 1.2) +
   scale_color_manual(values = c("Mask" = "pink", "No Mask" = "blue")) +  
@@ -135,16 +147,20 @@ ggplot(covid_data, aes(x = date, y = covid_cases, color = counties, group = coun
   )
 ```
 
-![](lab-07_files/figure-gfm/misleading%20visz-1.png)<!-- -->
+![](lab-07_files/figure-gfm/misleading%20visz-1.png)<!-- --> \# Discuss
+the key factors that contribute to this message, such as the variables
+used, the scale of the axes, and the type of visualization.
 
-``` r
-# Discuss the key factors that contribute to this message, such as the variables used, the scale of the axes, and the type of visualization.
+the variables we have are the: date (X-axis), which allowing a clear
+view of trends over time; and covid_cases (Y-axis) which is the measure
+of the infection rate; and counties shows the COVID-19 cases per 100K
+population, which is the primary measure of infection rate; and counties
+(colored as “Mask” Vs. “No Mask”) given a easy comparison between two
+groups.
 
-# the variables we have are the: date (X-axis), which allowing a clear view of trends over time; and covid_cases (Y-axis) which is the measure of the infection rate; and counties shows the COVID-19 cases per 100K population, which is the primary measure of infection rate; and counties (colored as "Mask" Vs. "No Mask") given a easy comparison between two groups.
+I use a Line Graph, because this graph shows trends over time.
 
-# I use a Line Graph, because this graph shows trends over time.
-
-# In my opposite visualization, I flipped the Y-axis to make it look like the COVID cases in counties without masks were progressively decreasing. The misleading message I was trying to convey was that the masks had no effect and even increased COVID-19 cases.
-```
-
-Add exercise headings as needed.
+In my opposite visualization, I flipped the Y-axis to make it look like
+the COVID cases in counties without masks were progressively decreasing.
+The misleading message I was trying to convey was that the masks had no
+effect and even increased COVID-19 cases.
